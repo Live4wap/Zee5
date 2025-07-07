@@ -420,7 +420,7 @@
                 const lines = m3uText.split('\n');
 
                 for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].includes('Star_Sports_HD1_Hindi')) {
+                    if (lines[i].includes('Sidharth_TV')) {
                         const clearKeyLine = lines[i + 1];
                         const clearKeyMatch = clearKeyLine.match(/license_key=([^:]+):([a-f0-9]+)/);
                         if (clearKeyMatch)   
@@ -434,7 +434,7 @@
                         if (cookieMatch) {
                             cookieHeader = cookieMatch[1];
                         }
-                        const urlLine = lines.find(line => line.includes('Star_Sports_HD1_Hindi') && line.includes('.mpd'));
+                        const urlLine = lines.find(line => line.includes('Sidharth_TV') && line.includes('.mpd'));
                         if (urlLine) {
                             streamUrl = urlLine.split('&xxx=')[0];
                         }
