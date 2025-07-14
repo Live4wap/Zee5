@@ -374,6 +374,11 @@
 
 
 <script>
+
+var urlParams = new URLSearchParams(window.location.search);
+    var name = urlParams.get('name');
+var keyId = urlParams.get('keyId');
+var key = urlParams.get('key');
         document.addEventListener('DOMContentLoaded', async () => {
             shaka.polyfill.installAll();
 
@@ -408,7 +413,7 @@
 
             let drmConfig = {
                 clearKeys: {
-                "4c13b89593dd53dea599d536b306528e":"36a170e30a62bae6ec4af300992015c2"
+                [keyId]:key, 
                 }
             };
             let cookieHeader = "__hdnea__=st=1750159300~exp=1750245700~acl=/*~hmac=dc9aefe01d42aec99a9cf17876cc0bc115ce2a38f69131a022c2a0f0563a9487";
@@ -420,7 +425,7 @@
                 const lines = m3uText.split('\n');
 
                 for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].includes('Sidharth_TV')) {
+                    if (lines[i].includes(name)) {
                         const clearKeyLine = lines[i + 1];
                         const clearKeyMatch = clearKeyLine.match(/license_key=([^:]+):([a-f0-9]+)/);
                         if (clearKeyMatch)   
@@ -434,7 +439,7 @@
                         if (cookieMatch) {
                             cookieHeader = cookieMatch[1];
                         }
-                        const urlLine = lines.find(line => line.includes('Sidharth_TV') && line.includes('.mpd'));
+                        const urlLine = lines.find(line => line.includes(name) && line.includes('.mpd'));
                         if (urlLine) {
                             streamUrl = urlLine.split('&xxx=')[0];
                         }
