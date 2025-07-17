@@ -431,7 +431,7 @@ console.log(result);
                 const lines = m3uText.split('\n');
 
                 for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].includes(result)) {
+                    if (lines[i].includes(${result})) {
                         const clearKeyLine = lines[i + 1];
                         const clearKeyMatch = clearKeyLine.match(/license_key=([^:]+):([a-f0-9]+)/);
                         if (clearKeyMatch)   
@@ -445,7 +445,7 @@ console.log(result);
                         if (cookieMatch) {
                             cookieHeader = cookieMatch[1];
                         }
-                        const urlLine = lines.find(line => line.includes(result) && line.includes('.mpd'));
+                        const urlLine = lines.find(line => line.includes(${result}) && line.includes('.mpd'));
                         if (urlLine) {
                             streamUrl = urlLine.split('&xxx=')[0];
                         }
