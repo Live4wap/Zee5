@@ -379,7 +379,13 @@ var urlParams = new URLSearchParams(window.location.search);
     var name = urlParams.get('name');
 var keyId = urlParams.get('keyId');
 var key = urlParams.get('key');
-        document.addEventListener('DOMContentLoaded', async () => {
+        
+    let str ="name"; 
+let result = str.split(" ").map(word => word.replace(" ", "_")).join("_");
+console.log(result);
+    
+    
+    document.addEventListener('DOMContentLoaded', async () => {
             shaka.polyfill.installAll();
 
             if (!shaka.Player.isBrowserSupported()) {
@@ -425,7 +431,7 @@ var key = urlParams.get('key');
                 const lines = m3uText.split('\n');
 
                 for (let i = 0; i < lines.length; i++) {
-                    if (lines[i].includes(name)) {
+                    if (lines[i].includes(result)) {
                         const clearKeyLine = lines[i + 1];
                         const clearKeyMatch = clearKeyLine.match(/license_key=([^:]+):([a-f0-9]+)/);
                         if (clearKeyMatch)   
@@ -439,7 +445,7 @@ var key = urlParams.get('key');
                         if (cookieMatch) {
                             cookieHeader = cookieMatch[1];
                         }
-                        const urlLine = lines.find(line => line.includes(name) && line.includes('.mpd'));
+                        const urlLine = lines.find(line => line.includes(result) && line.includes('.mpd'));
                         if (urlLine) {
                             streamUrl = urlLine.split('&xxx=')[0];
                         }
